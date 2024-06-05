@@ -1,9 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>
-        Projects
-    </h1>
+    <h1>Projects</h1>
     <div class="container mt-5">
         <div class="card">
             <div class="card-header bg-primary text-white">
@@ -27,7 +25,11 @@
                             <td>{{ $project->name }}</td>
                             <td>{{ $project->client_name }}</td>
                             <td>{{ $project->created_at }}</td>
-                            <td><a href="{{route('admin.projects.show', ['project'=> $project->id]) }}">More...</a></td>
+                            <td>
+                                <a href="{{route('admin.projects.show', ['project'=> $project->id]) }}" class="btn btn-info">Apri</a>
+                                <a href="{{route('admin.projects.edit', ['project'=> $project->id]) }}" class="btn btn-primary">Modica</a>
+                            </td>
+                            
                         </tr>
                         @endforeach
                     </tbody>
