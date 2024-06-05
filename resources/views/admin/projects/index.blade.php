@@ -27,7 +27,7 @@
                             <td>{{ $project->name }}</td>
                             <td>{{ $project->client_name }}</td>
                             <td>{{ $project->created_at }}</td>
-                            <td><a href="{{route('admin.projects.show', ['project'=> $project->id]) }}">Go to the project</a></td>
+                            <td><a href="{{route('admin.projects.show', ['project'=> $project->id]) }}">More...</a></td>
                         </tr>
                         @endforeach
                     </tbody>
