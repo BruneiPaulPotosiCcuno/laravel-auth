@@ -83,7 +83,7 @@ class ProjectController extends Controller
         $formData = $request->all();
         $formData['slug'] = Str::slug($formData['name'], '_'); 
         $project->update($formData);
-        return redirect()->route('admin.projects.show', ['project' => $project->id]);
+        return redirect()->route('admin.projects .show', ['project' => $project->id]);
     }
 
     /**

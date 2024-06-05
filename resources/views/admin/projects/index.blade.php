@@ -25,9 +25,10 @@
                             <td>{{ $project->name }}</td>
                             <td>{{ $project->client_name }}</td>
                             <td>{{ $project->created_at }}</td>
-                            <td>
+                            <td class="d-flex justify-content-around">
                                 <a href="{{route('admin.projects.show', ['project'=> $project->id]) }}" class="btn btn-info">Apri</a>
                                 <a href="{{route('admin.projects.edit', ['project'=> $project->id]) }}" class="btn btn-primary">Modica</a>
+                                <a href="{{route('admin.projects.edit', ['project'=> $project->id]) }}" class="btn btn-danger">Elimina</a>
                             </td>
                             
                         </tr>
