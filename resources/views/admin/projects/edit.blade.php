@@ -2,6 +2,15 @@
 
 @section('content')
     <div class="container mt-5">
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+              @endif
         <div class="card border-0 rounded-3 shadow-lg">
             <div class="card-header bg-primary text-white py-3">
                 <h1 class="mb-0">Modifica Progetto: {{ $project->name }}</h1>

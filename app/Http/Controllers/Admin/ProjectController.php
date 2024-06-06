@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class ProjectController extends Controller
 {
@@ -38,6 +39,16 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(
+            [
+                'name' => 'required|min:5|max:255|unique:projects,name',
+                'client_name' => 'nullable|min:5',
+                'summary' => 'nullable|min:5',
+
+            ]
+            );
+
+
         $formData = $request->all();
 
         $newProject = new Project();
@@ -83,7 +94,7 @@ class ProjectController extends Controller
         $formData = $request->all();
         $formData['slug'] = Str::slug($formData['name'], '_'); 
         $project->update($formData);
-        return redirect()->route('admin.projects .show', ['project' => $project->id]);
+        return redirect()->route('admin.projects.show', ['project' => $project->id]);
     }
 
     /**
@@ -92,8 +103,9 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return redirect()->route('admin.projects.index');
     }
 }

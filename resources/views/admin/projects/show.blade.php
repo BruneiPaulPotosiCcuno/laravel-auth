@@ -3,8 +3,11 @@
 @section('content')
     <div class="container mt-5">
         <div class="card shadow-lg">
+            
             <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                
                 <h1 class="mb-0">Progetto N.{{ $project->id }}</h1>
+                <div><a href="{{route('admin.projects.edit', ['project'=> $project->id]) }}" class="btn btn-warning">Modica</a></div>
             </div>
             <div class="card-body">
                 <div class="row mb-4">
