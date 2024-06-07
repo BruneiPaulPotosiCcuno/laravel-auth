@@ -10,7 +10,7 @@
                 @endforeach
             </ul>
         </div>
-              @endif
+        @endif
         <div class="card border-0 rounded-3 shadow-lg">
             <div class="card-header bg-primary text-white py-3">
                 <h1 class="mb-0">Modifica Progetto: {{ $project->name }}</h1>
@@ -22,17 +22,17 @@
 
                     <div class="mb-3">
                         <label for="name" class="form-label">Nome del Progetto</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{ $project->name }}">
+                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $project->name) }}">
                     </div>
 
                     <div class="mb-3">
                         <label for="client_name" class="form-label">Nome del Cliente</label>
-                        <input type="text" class="form-control" id="client_name" name="client_name" value="{{ $project->client_name }}">
+                        <input type="text" class="form-control" id="client_name" name="client_name" value="{{ old('client_name', $project->client_name) }}">
                     </div>
 
                     <div class="mb-3">
                         <label for="summary" class="form-label">Descrizione</label>
-                        <textarea class="form-control" id="summary" name="summary" rows="10">{{ $project->summary }}</textarea>
+                        <textarea class="form-control" id="summary" name="summary" rows="10">{{ old('summary', $project->summary) }}</textarea>
                     </div>
 
                     <div class="d-flex justify-content-center">
