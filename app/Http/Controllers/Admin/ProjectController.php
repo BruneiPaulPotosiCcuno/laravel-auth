@@ -39,25 +39,20 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(
+        $validated = $request->validate(
             [
-                'name' => 'required|min:5|max:255|unique:projects,name',
-                'client_name' => 'nullable|min:5',
-                'summary' => 'nullable|min:5',
-
+                'name' => 'required|min:5|max:150|unique:projetcs,name',
+                'summary' => 'nullable|min:10'
             ]
-            );
-
+        );
 
         $formData = $request->all();
 
         $newProject = new Project();
         $newProject->fill($formData);
-        $newProject->slug = Str::slug($newProject->name, '_'); 
+        $newProject->slug = Str::slug($newProject->name, '-');
         $newProject->save();
-
-        return redirect()->route('admin.projects.show', ['project'=> $newProject->id]);
-
+        return redirect()->route('admin.projects.show', ['project' => $newProject->id]);
     }
 
     /**
@@ -91,12 +86,24 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        $formData = $request->all();
-        $formData['slug'] = Str::slug($formData['name'], '_'); 
-        $project->update($formData);
-        return redirect()->route('admin.projects.show', ['project' => $project->id]);
-    }
+        $request->validate(
+            [
+                'name' => [
+                    'required',
+                    'min:5',
+                    'max:250',
+                    Rule::unique('projects')->ignore($project)
+                ],
+                
 
+            ]
+            );
+
+    $formData = $request->all();
+    $project->slug = Str::slug($formData['name'], '-');
+    $project->update($formData);
+    return redirect()->route('admin.projects.show', ['project' => $project->id]);
+    }
     /**
      * Remove the specified resource from storage.
      *
