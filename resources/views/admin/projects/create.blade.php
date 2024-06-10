@@ -16,7 +16,7 @@
           @endif
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.projects.store') }}" method="POST">
+                <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="mb-3">
@@ -27,6 +27,11 @@
                     <div class="mb-3">
                         <label for="client_name" class="form-label">Nome del Cliente</label>
                         <input type="text" class="form-control" id="client_name" name="client_name" placeholder="Inserisci il nome del cliente" value="{{old('client_name')}}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="cover_image" class="form-label">Immagine del Progetto</label>
+                        <input type="file" class="form-control" id="cover_image" name="cover_image">
                     </div>
 
                     <div class="mb-3">
