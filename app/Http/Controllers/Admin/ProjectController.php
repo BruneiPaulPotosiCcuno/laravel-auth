@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
@@ -41,12 +42,21 @@ class ProjectController extends Controller
     {
         $validated = $request->validate(
             [
-                'name' => 'required|min:5|max:150|unique:projetcs,name',
+                'name' => 'required|min:5|max:150|unique:projects,name',
                 'summary' => 'nullable|min:10'
             ]
         );
 
         $formData = $request->all();
+
+        // add if per la cover-image
+
+        if($request->hasFile('cover_image')){
+            // Upload del file in cartella publica
+            $img_path = Storage::disk('public')->put('project_images', $formData['cover_image']);
+            // save nella coloumn del DB
+            $formData['cover_image'] = $img_path;
+        }
 
         $newProject = new Project();
         $newProject->fill($formData);
