@@ -19,6 +19,14 @@
                         <h5 class="text-primary">Nome del progetto</h5>
                         <p class="border p-3 rounded bg-light">{{ $project->name }}</p>
                     </div>
+
+                    @if ($project->cover_image)
+                    <div class="col-12 d-flex justify-content-center mb-4">
+                        <img src="{{ asset('storage/' . $project->cover_image) }}" alt="{{ $project->name }}" class="img-fluid hover-shadow rounded">
+                    </div>
+                @endif
+
+
                 </div>
                 <div class="row mb-4">
                     <div class="col-md-6">
