@@ -43,7 +43,8 @@ class ProjectController extends Controller
         $validated = $request->validate(
             [
                 'name' => 'required|min:5|max:150|unique:projects,name',
-                'summary' => 'nullable|min:10'
+                'summary' => 'nullable|min:10',
+                'cover_image'=> 'nullable|image|max:256'
             ]
         );
 
@@ -109,7 +110,24 @@ class ProjectController extends Controller
             ]
             );
 
+
+            
+
     $formData = $request->all();
+
+    if ($request->hasFile('cover_image')) {
+
+
+        if ($project->cover_image) {
+            Storage::delete($project->cover_image);
+        }
+        
+        
+        $img_path = Storage::disk('public')->put('project_images', $formData['cover_image']);
+        // save nella coloumn del DB
+        $formData['cover_image'] = $img_path;
+    }
+
     $project->slug = Str::slug($formData['name'], '-');
     $project->update($formData);
     return redirect()->route('admin.projects.show', ['project' => $project->id]);

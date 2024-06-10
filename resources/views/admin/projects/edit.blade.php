@@ -16,13 +16,28 @@
                 <h1 class="mb-0">Modifica Progetto: {{ $project->name }}</h1>
             </div>
             <div class="card-body">
-                <form  action="{{ route('admin.projects.update', ['project' => $project->id]) }}" method="POST">
+                <form  action="{{ route('admin.projects.update', ['project' => $project->id]) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
                     <div class="mb-3">
                         <label for="name" class="form-label">Nome del Progetto</label>
                         <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $project->name) }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Immagine</label>
+
+                        <input type="file" class="form-control" id="cover_image" name="cover_image">
+                        @if ($project->cover_image)
+
+                        <img width="100" src="{{ asset('storage/' . $project->cover_image) }}" alt="{{ $project->name }}" class="img-fluid hover-shadow rounded">
+                            
+                        @else
+                        <small>
+                            Nessuna immagine selezionata
+                        </small>
+                        @endif
                     </div>
 
                     <div class="mb-3">
